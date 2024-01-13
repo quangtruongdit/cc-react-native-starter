@@ -7,7 +7,6 @@ import TextInput from "../components/TextInput"
 import Button from "../components/Button"
 import { ITextInput } from "../types/text-input"
 
-
 interface ISignInScreen {
     navigation: any
 }
@@ -22,14 +21,16 @@ export const SignInScreen: FC<ISignInScreen> = ({ navigation }: any) => {
         value: 'cityslicka',
         error: '',
     });
-    
+
     function onPressSignIn() {
         console.log('On Press Sign In Button')
         console.log(email)
         console.log(password)
+        //TODO Handle calling api with email and password
+        navigation.navigate('Home');
     }
 
-    return(
+    return (
         <Background>
             <View style={{ width: '100%', height: '100%', padding: 20, flex: 1, flexDirection: 'column' }}>
                 <View style={{ alignContent: 'center', flex: 0.2 }}>
@@ -96,7 +97,6 @@ export const SignInScreen: FC<ISignInScreen> = ({ navigation }: any) => {
                     </View>
                 </View>
                 <View style={{ alignContent: 'center', flex: 0.2 }}>
-
                 </View>
             </View>
         </Background>
