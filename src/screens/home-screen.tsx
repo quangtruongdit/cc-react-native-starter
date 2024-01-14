@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { useAuth } from '../../contexts/auth-context';
+import { useAuth } from '../contexts/auth-context';
 import Button from '../components/Button';
 
 interface HomeScreenProps {
@@ -22,20 +22,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                         >
                             <Text>View Profile</Text>
                         </Button>
-
-                        <Button
-                            title="View Demo"
-                            onPress={() =>
-                                navigation.navigate('Demo')
-                            }
-                        >
-                            <Text>View Demo</Text>
-                        </Button>
-
                     </View>
-                    <Button onPress={logout}>
-                        <Text>Logout</Text>
-                    </Button>
+                    
                 </>
             ) : (
                 <>
