@@ -9,13 +9,18 @@ import DemoUseContext, { FeatureComponent2 } from './src/screens/demo/demo-useco
 import { AuthProvider } from './src/contexts/auth-context';
 import { HomeScreen } from './src/screens/home-screen';
 import MainNavigator from './src/screens/navigator/main-navigator';
+import ListScreen from './src/screens/list-screen';
+import { Provider } from 'react-redux';
+import store from './src/stores/store';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <AuthProvider>
-      <AppContent />
+      <Provider store={store}>
+        <AppContent />
+      </Provider>
     </AuthProvider>
 
   );
@@ -26,15 +31,20 @@ const AppContent: React.FC = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
+          name="List"
+          component={ListScreen}
+          options={{ title: 'List Screen' }}
+        />
+        {/* <Stack.Screen
           name="Main"
           component={MainNavigator}
           options={{ title: 'ReactNativeStater' }}
-        />
-         <Stack.Screen
+        /> */}
+        {/* <Stack.Screen
           name="SignIn"
           component={SignInScreen}
           options={{ title: 'SignIn Screen' }}
-        />
+        /> */}
         {/* <Stack.Screen
           name="Demo"
           component={DemoUseContext}
