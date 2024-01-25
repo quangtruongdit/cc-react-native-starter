@@ -30,21 +30,21 @@ const AppContent: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="List"
           component={ListScreen}
           options={{ title: 'List Screen' }}
-        />
-        {/* <Stack.Screen
+        /> */}
+        <Stack.Screen
           name="Main"
           component={MainNavigator}
           options={{ title: 'ReactNativeStater' }}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="SignIn"
           component={SignInScreen}
           options={{ title: 'SignIn Screen' }}
-        /> */}
+        />
         {/* <Stack.Screen
           name="Demo"
           component={DemoUseContext}

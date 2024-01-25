@@ -6,6 +6,7 @@ import { ProfileScreen } from '../profile-screen';
 import { DemoScreen } from '../demo-screen';
 import { Icon } from 'react-native-material-ui';
 import { Image, StyleSheet, Text } from 'react-native';
+import ListScreen from '../list-screen';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,15 @@ const MainNavigator: React.FC<IMainNavigator> = ({ navigation }) => {
                 ),
             }} />
 
-            <Tab.Screen name="Tab3" component={DemoScreen} options={{
+            {/* <Tab.Screen name="Tab3" component={DemoScreen} options={{
+                tabBarLabel: 'List',
+                tabBarIcon: ({ color, size }) => (
+                    <Image source={require('../../assets/images/list.png')} style={styles.icon} />
+                ),
+
+            }} /> */}
+
+            <Tab.Screen name="Tab3" component={ListScreen} options={{
                 tabBarLabel: 'List',
                 tabBarIcon: ({ color, size }) => (
                     <Image source={require('../../assets/images/list.png')} style={styles.icon} />

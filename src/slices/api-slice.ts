@@ -6,7 +6,7 @@ interface Photo {
     albumId: number;
     id: number;
     title: string;
-    url: string; // Assuming 'url' is the property representing the image URL
+    url: string; 
     thumbnailUrl: string;
   }
 
@@ -21,11 +21,6 @@ const initialState: ApiState = {
     loading: false,
     error: null,
 };
-
-// export const fetchApiData = createAsyncThunk('api/fetchApiData', async () => {
-//     const response = await apiService.fetchData();
-//     return response.data;
-// });
   
 export const apiSlice = createSlice({
     name: 'api',
@@ -44,25 +39,9 @@ export const apiSlice = createSlice({
             state.error = action.payload;
         },
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //       .addCase(fetchApiData.pending, (state) => {
-    //         state.loading = true;
-    //         state.error = null;
-    //       })
-    //       .addCase(fetchApiData.fulfilled, (state, action) => {
-    //         state.loading = false;
-    //         state.data = action.payload;
-    //       })
-    //       .addCase(fetchApiData.rejected, (state, action) => {
-    //         state.loading = false;
-    //         state.error = action.error.message ?? 'Something went wrong';
-    //       });
-    //   },
 });
 
 export const { fetchDataStart, fetchDataSuccess, fetchDataFailure } = apiSlice.actions;
-
 
 export const fetchApiData = (): AppThunk => async (dispatch) => {
     dispatch(fetchDataStart());
