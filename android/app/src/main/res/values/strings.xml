@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ReactNativeStarter</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">sBAxSqdCwNacI3t8Z9Sft7JCsbIkiHz9Bndg2</string>
+    <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
+    <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
 </resources>

@@ -12,6 +12,7 @@ import MainNavigator from './src/screens/navigator/main-navigator';
 import ListScreen from './src/screens/list-screen';
 import { Provider } from 'react-redux';
 import store from './src/stores/store';
+import codePush from 'react-native-code-push';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,4 +56,10 @@ const AppContent: React.FC = () => {
   )
 }
 
-export default App;
+const codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
+
+// const codePushOptions = {
+//   checkFrequency: codePush.CheckFrequency.ON_APP_START
+// };
+
+export default codePush(codePushOptions)(App);
