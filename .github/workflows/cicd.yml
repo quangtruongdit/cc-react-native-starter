@@ -64,6 +64,6 @@ jobs:
 
       - name: Deploy to AppCenter
         run: |
-          appcenter codepush release-react -a ${{ secrets.APPCENTER_OWNER_NAME }}/cc-react-native-starter -t Staging --token ${{ secrets.APPCENTER_ACCESS_TOKEN }}
+          appcenter codepush release-react -a ${{ secrets.APPCENTER_OWNER_NAME }}/cc-react-native-starter -d Staging --token ${{ secrets.APPCENTER_ACCESS_TOKEN }}
         env:
           APPCENTER_ACCESS_TOKEN: ${{ secrets.APPCENTER_ACCESS_TOKEN }}
