@@ -38,8 +38,7 @@ jobs:
         run: cd android && chmod +x ./gradlew
   
       - name: Build Android App Bundle
-        run: |
-          cd ./gradlew bundleRelease --no-daemon
+        run: ./gradlew bundleRelease --no-daemon
         
       # - name: Build iOS
       #   run: npm run build-ios
