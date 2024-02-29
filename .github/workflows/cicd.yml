@@ -39,7 +39,7 @@ jobs:
   
       - name: Build Android App Bundle
         run: |
-          cd android && ./gradlew bundleRelease --no-daemon
+          cd ./gradlew bundleRelease --no-daemon
         
       # - name: Build iOS
       #   run: npm run build-ios
