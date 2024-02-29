@@ -14,14 +14,35 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
-      - name: Build Android
-        run: npm run build-android
-        # Or whatever your build script is for Android
+      # - name: Run test
+      #   run: |
+      #     yarn test-ci
 
-      - name: Build iOS
-        run: npm run build-ios
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+  
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
+  
+      - name: Make Gradlew Executable
+        run: cd android && chmod +x ./gradlew
+  
+      - name: Build Android App Bundle
+        run: |
+          cd android && ./gradlew bundleRelease --no-daemon
+        
+      # - name: Build iOS
+      #   run: npm run build-ios
         # Or whatever your build script is for iOS
 
       - name: Login to AppCenter
