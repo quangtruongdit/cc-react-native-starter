@@ -1,0 +1,34 @@
+name: CI/CD with CodePush
+
+on:
+  push:
+    branches:
+      - code_push
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Android
+        run: npm run build-android
+        # Or whatever your build script is for Android
+
+      - name: Build iOS
+        run: npm run build-ios
+        # Or whatever your build script is for iOS
+
+      - name: Login to AppCenter
+        run: appcenter login --token ${{ secrets.APPCENTER_ACCESS_TOKEN }}
+
+      - name: Deploy to AppCenter
+        run: |
+          appcenter codepush release-react -a ${{ secrets.APPCENTER_OWNER_NAME }}/<appName> -t Staging --token ${{ secrets.APPCENTER_ACCESS_TOKEN }}
+        env:
+          APPCENTER_ACCESS_TOKEN: ${{ secrets.APPCENTER_ACCESS_TOKEN }}
