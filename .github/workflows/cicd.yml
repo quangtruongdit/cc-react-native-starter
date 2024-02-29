@@ -26,31 +26,31 @@ jobs:
       #   run: |
       #     yarn test-ci
 
-      # - name: Cache Gradle Wrapper
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ~/.gradle/wrapper
-      #     key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
   
-      # - name: Cache Gradle Dependencies
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ~/.gradle/caches
-      #     key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-gradle-caches-
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
 
-      # - name: Print current path
-      #   run: echo "Current path $(pwd)"
+      - name: Print current path
+        run: echo "Current path $(pwd)"
         
-      # - name: Make Gradlew Executable
-      #   run: cd android && chmod +x ./gradlew
+      - name: Make Gradlew Executable
+        run: cd android && chmod +x ./gradlew
 
-      # - name: Print current path
-      #   run: echo "Current path $(pwd)"
+      - name: Print current path
+        run: echo "Current path $(pwd)"
         
-      # - name: Build Android App Bundle
-      #   run: cd android && ./gradlew bundleRelease --no-daemon
+      - name: Build Android App Bundle
+        run: cd android && ./gradlew bundleRelease --no-daemon
         
       # - name: Build iOS
       #   run: npm run build-ios
@@ -64,6 +64,6 @@ jobs:
 
       - name: Deploy to AppCenter
         run: |
-          appcenter codepush release-react -a ${{ secrets.APPCENTER_OWNER_NAME }}/<appName> -t Staging --token ${{ secrets.APPCENTER_ACCESS_TOKEN }}
+          appcenter codepush release-react -a ${{ secrets.APPCENTER_OWNER_NAME }}/cc-react-native-starter -t Staging --token ${{ secrets.APPCENTER_ACCESS_TOKEN }}
         env:
           APPCENTER_ACCESS_TOKEN: ${{ secrets.APPCENTER_ACCESS_TOKEN }}
