@@ -33,12 +33,18 @@ jobs:
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-caches-
-  
+
+      - name: Print current path
+        run: echo "Current path $(pwd)"
+        
       - name: Make Gradlew Executable
         run: cd android && chmod +x ./gradlew
-  
+
+      - name: Print current path
+        run: echo "Current path $(pwd)"
+        
       - name: Build Android App Bundle
-        run: ./gradlew bundleRelease --no-daemon
+        run: cd android && ./gradlew bundleRelease --no-daemon
         
       # - name: Build iOS
       #   run: npm run build-ios
