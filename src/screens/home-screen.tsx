@@ -13,7 +13,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <View style={{margin: 10, flex: 1, flexDirection: 'column'}}>
             {user ? (
                 <>
-                    <Text style={{flex: 1}}>Welcome, {user.username}!</Text>
+                    <Text style={{flex: 1}}>Welcome to my app, {user.username}!</Text>
                     <View>
                         <Button
                             onPress={() =>

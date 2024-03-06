@@ -1,0 +1,69 @@
+name: CI/CD with CodePush
+
+on:
+  push:
+    branches:
+      - code_push
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      # - name: Run test
+      #   run: |
+      #     yarn test-ci
+
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+  
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
+
+      - name: Print current path
+        run: echo "Current path $(pwd)"
+        
+      - name: Make Gradlew Executable
+        run: cd android && chmod +x ./gradlew
+
+      - name: Print current path
+        run: echo "Current path $(pwd)"
+        
+      - name: Build Android App Bundle
+        run: cd android && ./gradlew bundleRelease --no-daemon
+        
+      # - name: Build iOS
+      #   run: npm run build-ios
+        # Or whatever your build script is for iOS
+
+      - name: Install AppCenter CLI
+        run: npm install -g appcenter-cli
+        
+      - name: Login to AppCenter
+        run: appcenter login --token ${{ secrets.APPCENTER_ACCESS_TOKEN }}
+
+      - name: Deploy to AppCenter
+        run: |
+          appcenter codepush release-react -a ${{ secrets.APPCENTER_OWNER_NAME }}/cc-react-native-starter -d Staging --token ${{ secrets.APPCENTER_ACCESS_TOKEN }}
+        env:
+          APPCENTER_ACCESS_TOKEN: ${{ secrets.APPCENTER_ACCESS_TOKEN }}
